@@ -19,7 +19,7 @@
     },
     "autoload"    : {
 		"psr-4" : {
-			"Kirki\\Modules\\CSS_Vars\\" : "src/"
+			"Kirki\\Modules\\Webfonts\\" : "src/"
         },
         "files": ["src/aliases.php"]
     }
