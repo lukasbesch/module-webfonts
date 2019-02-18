@@ -10,10 +10,14 @@
  * @since       3.0
  */
 
+namespace Kirki\Modules\Webfonts;
+
+use Kirki\Modules\Webfonts\Helper;
+
 /**
  * Manages the way Google Fonts are enqueued.
  */
-final class Kirki_Modules_Webfonts_Embed {
+final class Embed {
 
 	/**
 	 * The config ID.
@@ -157,7 +161,7 @@ final class Kirki_Modules_Webfonts_Embed {
 			if ( ! $contents ) {
 
 				// Get the contents of the remote URL.
-				$contents = Kirki_Fonts_Helper::get_remote_url_contents(
+				$contents = Helper::get_remote_url_contents(
 					$url,
 					array(
 						'headers' => array(
@@ -225,7 +229,7 @@ final class Kirki_Modules_Webfonts_Embed {
 		preg_match( '/https\:.*?\.woff/', $css, $matches );
 		foreach ( $matches as $match ) {
 			if ( 0 === strpos( $match, 'https://fonts.gstatic.com' ) ) {
-				$new_url = Kirki_Fonts_Helper::download_font_file( $match );
+				$new_url = Helper::download_font_file( $match );
 				if ( $new_url ) {
 					$css = str_replace( $match, $new_url, $css );
 				}

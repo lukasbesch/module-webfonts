@@ -11,15 +11,18 @@
  * @since       1.0
  */
 
+namespace Kirki\Modules\Webfonts;
+
 use Kirki\Core\Values;
+use Kirki\Modules\Webfonts\Fonts;
 
 /**
  * Manages the way Google Fonts are enqueued.
  */
-final class Kirki_Fonts_Google {
+final class Google {
 
 	/**
-	 * The Kirki_Fonts_Google instance.
+	 * The object instance.
 	 * We use the singleton pattern here to avoid loading the google-font array multiple times.
 	 * This is mostly a performance tweak.
 	 *
@@ -88,7 +91,7 @@ final class Kirki_Fonts_Google {
 		add_action( 'wp_ajax_nopriv_kirki_fonts_standard_all_get', array( $this, 'get_standardfonts_json' ) );
 
 		// Populate the array of google fonts.
-		$this->google_fonts = Kirki_Fonts::get_google_fonts();
+		$this->google_fonts = Fonts::get_google_fonts();
 	}
 
 	/**
@@ -99,7 +102,7 @@ final class Kirki_Fonts_Google {
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
-			self::$instance = new Kirki_Fonts_Google();
+			self::$instance = new self();
 		}
 		return self::$instance;
 	}
@@ -125,7 +128,7 @@ final class Kirki_Fonts_Google {
 			}
 
 			// If not a google-font, then we can skip this.
-			if ( ! isset( $value['font-family'] ) || ! Kirki_Fonts::is_google_font( $value['font-family'] ) ) {
+			if ( ! isset( $value['font-family'] ) || ! Fonts::is_google_font( $value['font-family'] ) ) {
 				return;
 			}
 
@@ -231,7 +234,7 @@ final class Kirki_Fonts_Google {
 	 * @return void
 	 */
 	public function get_googlefonts_json() {
-		include wp_normalize_path( dirname( __FILE__ ) . '/webfonts.json' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
+		include 'webfonts.json'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
 		wp_die();
 	}
 
@@ -242,7 +245,7 @@ final class Kirki_Fonts_Google {
 	 * @return void
 	 */
 	public function get_standardfonts_json() {
-		echo wp_json_encode( Kirki_Fonts::get_standard_fonts() );
+		echo wp_json_encode( Fonts::get_standard_fonts() );
 		wp_die();
 	}
 }

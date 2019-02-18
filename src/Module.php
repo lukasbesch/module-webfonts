@@ -10,8 +10,14 @@
  * @since       3.0.0
  */
 
+namespace Kirki\Modules\Webfonts;
+
 use Kirki\Core\Helper;
 use Kirki\Core\Values;
+use Kirki\Core\Kirki;
+use Kirki\Modules\Webfonts\Google;
+use Kirki\Modules\Webfonts\Embed;
+use Kirki\Modules\Webfonts\Async;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Adds script for tooltips.
  */
-class Kirki_Modules_Webfonts {
+class Module {
 
 	/**
 	 * The object instance.
@@ -34,11 +40,11 @@ class Kirki_Modules_Webfonts {
 	private static $instance;
 
 	/**
-	 * The Kirki_Fonts_Google object.
+	 * The Google object.
 	 *
 	 * @access protected
 	 * @since 3.0.0
-	 * @var object
+	 * @var \Kirki\Modules\Webfonts\Google
 	 */
 	protected $fonts_google;
 
@@ -49,13 +55,7 @@ class Kirki_Modules_Webfonts {
 	 * @since 3.0.0
 	 */
 	protected function __construct() {
-
-		include_once wp_normalize_path( dirname( __FILE__ ) . '/class-kirki-fonts-helper.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
-		include_once wp_normalize_path( dirname( __FILE__ ) . '/class-kirki-fonts.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
-		include_once wp_normalize_path( dirname( __FILE__ ) . '/class-kirki-fonts-google.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
-
 		add_action( 'wp_loaded', array( $this, 'run' ) );
-
 	}
 
 	/**
@@ -65,7 +65,7 @@ class Kirki_Modules_Webfonts {
 	 * @since 3.0.0
 	 */
 	public function run() {
-		$this->fonts_google = Kirki_Fonts_Google::get_instance();
+		$this->fonts_google = Google::get_instance();
 		$this->init();
 	}
 
@@ -94,9 +94,9 @@ class Kirki_Modules_Webfonts {
 	protected function init() {
 		foreach ( array_keys( Kirki::$config ) as $config_id ) {
 			if ( 'async' === $this->get_method() ) {
-				new Kirki_Modules_Webfonts_Async( $config_id, $this, $this->fonts_google );
+				new Async( $config_id, $this, $this->fonts_google );
 			}
-			new Kirki_Modules_Webfonts_Embed( $config_id, $this, $this->fonts_google );
+			new Embed( $config_id, $this, $this->fonts_google );
 		}
 	}
 

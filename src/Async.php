@@ -10,10 +10,12 @@
  * @since       3.0
  */
 
+namespace Kirki\Modules\Webfonts;
+
 /**
  * Manages the way Google Fonts are enqueued.
  */
-final class Kirki_Modules_Webfonts_Async {
+final class Async {
 
 	/**
 	 * The config ID.
@@ -123,7 +125,7 @@ final class Kirki_Modules_Webfonts_Async {
 			$this->fonts_to_load[] = $font . ':' . join( ',', $weights ) . ':cyrillic,cyrillic-ext,devanagari,greek,greek-ext,khmer,latin,latin-ext,vietnamese,hebrew,arabic,bengali,gujarati,tamil,telugu,thai';
 		}
 		if ( ! empty( $this->fonts_to_load ) ) {
-			Kirki_Modules_Webfont_Loader::$load = true;
+			\Kirki_Modules_Webfont_Loader::$load = true;
 		}
 	}
 

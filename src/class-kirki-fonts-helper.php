@@ -10,6 +10,8 @@
  * @since      3.0.36
  */
 
+namespace Kirki\Modules\Webfonts;
+
 // Do not allow directly accessing this file.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Direct script access denied.' );
@@ -20,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 3.0.28
  */
-final class Kirki_Fonts_Helper {
+final class Helper {
 
 	/**
 	 * Gets the remote URL contents.

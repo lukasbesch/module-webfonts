@@ -10,10 +10,12 @@
  * @since       1.0
  */
 
+namespace Kirki\Modules\Webfonts;
+
 /**
  * The Kirki_Fonts object.
  */
-final class Kirki_Fonts {
+final class Fonts {
 
 	/**
 	 * The mode we'll be using to add google fonts.
@@ -134,7 +136,7 @@ final class Kirki_Fonts {
 
 		// If we got this far, cache was empty so we need to get from JSON.
 		ob_start();
-		include wp_normalize_path( dirname( __FILE__ ) . '/webfonts.json' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
+		include 'webfonts.json'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
 
 		$fonts_json = ob_get_clean();
 		$fonts      = json_decode( $fonts_json, true );
