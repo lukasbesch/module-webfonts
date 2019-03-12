@@ -218,7 +218,7 @@ final class Google {
 
 				// If this is not a valid variant for this font-family
 				// then unset it and move on to the next one.
-				if ( ! in_array( $variant, $font_variants, true ) ) {
+				if ( ! in_array( strval( $variant ), $font_variants, true ) ) {
 					$variant_key = array_search( $variant, $this->fonts[ $font ], true );
 					unset( $this->fonts[ $font ][ $variant_key ] );
 					continue;
