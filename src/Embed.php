@@ -227,7 +227,9 @@ final class Embed {
 	 */
 	private function use_local_files( $css ) {
 		preg_match_all( '/https\:.*?\.woff/', $css, $matches );
+
 		$matches = array_shift( $matches );
+
 		foreach ( $matches as $match ) {
 			if ( 0 === strpos( $match, 'https://fonts.gstatic.com' ) ) {
 				$new_url = Helper::download_font_file( $match );
