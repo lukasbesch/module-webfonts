@@ -15,6 +15,7 @@ namespace Kirki\Modules\Webfonts;
 
 use Kirki\Core\Values;
 use Kirki\Modules\Webfonts\Fonts;
+use Kirki\GoogleFonts;
 
 /**
  * Manages the way Google Fonts are enqueued.

@@ -44,7 +44,7 @@ final class Fonts {
 	 *
 	 * @static
 	 * @access public
-	 * @var null|object
+	 * @var array
 	 */
 	public static $google_fonts = null;
 
@@ -122,8 +122,11 @@ final class Fonts {
 	 * @return array    All Google Fonts.
 	 */
 	public static function get_google_fonts() {
-		$googlefonts = new GoogleFonts();
-		return $googlefonts->get_google_fonts();
+		if ( ! self::$google_fonts ) {
+			$googlefonts = new GoogleFonts();
+			self::$google_fonts = $googlefonts->get_google_fonts();
+		}
+		return self::$google_fonts;
 	}
 
 	/**
