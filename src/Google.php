@@ -85,8 +85,7 @@ final class Google {
 			return;
 		}
 
-		add_action( 'wp_ajax_kirki_fonts_google_all_get', [ $this, 'get_googlefonts_json' ] );
-		add_action( 'wp_ajax_nopriv_kirki_fonts_google_all_get', [ $this, 'get_googlefonts_json' ] );
+		new GoogleFonts();
 		add_action( 'wp_ajax_kirki_fonts_standard_all_get', [ $this, 'get_standardfonts_json' ] );
 		add_action( 'wp_ajax_nopriv_kirki_fonts_standard_all_get', [ $this, 'get_standardfonts_json' ] );
 
@@ -225,17 +224,6 @@ final class Google {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Gets the googlefonts JSON file.
-	 *
-	 * @since 3.0.17
-	 * @return void
-	 */
-	public function get_googlefonts_json() {
-		include 'webfonts.json'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
-		wp_die();
 	}
 
 	/**
