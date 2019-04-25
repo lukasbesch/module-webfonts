@@ -117,7 +117,7 @@ final class Google {
 	public function generate_google_font( $args ) {
 
 		// Process typography fields.
-		if ( isset( $args['type'] ) && 'kirki-typography' === $args['type'] ) {
+		if ( ( isset( $args['type'] ) && 'kirki-typography' === $args['type'] ) || ( isset( $args['choices'] ) && isset( $args['choices']['parent_type'] ) && 'kirki-typography' === $args['choices']['parent_type'] ) ) {
 
 			// Get the value.
 			$value = Values::get_sanitized_field_value( $args );
@@ -138,7 +138,7 @@ final class Google {
 			}
 
 			// Add the requested google-font.
-			if ( ! isset( $this->fonts[ $value['font-family'] ] ) ) {
+			if ( ! is_array( $value ) || ! isset( $value['font-family'] ) || ! isset( $this->fonts[ $value['font-family'] ] ) ) {
 				$this->fonts[ $value['font-family'] ] = [];
 			}
 			if ( ! in_array( $value['variant'], $this->fonts[ $value['font-family'] ], true ) ) {

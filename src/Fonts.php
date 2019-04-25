@@ -210,7 +210,11 @@ final class Fonts {
 	 * @return bool
 	 */
 	public static function is_google_font( $fontname ) {
-		return ( array_key_exists( $fontname, self::$google_fonts ) );
+		if ( is_string( $fontname ) ) {
+			$fonts = self::get_google_fonts();
+			return isset( $fonts[ $fontname ] );
+		}
+		return false;
 	}
 
 	/**
