@@ -123,7 +123,7 @@ final class Fonts {
 	 */
 	public static function get_google_fonts() {
 		if ( ! self::$google_fonts ) {
-			$googlefonts = new GoogleFonts();
+			$googlefonts        = new GoogleFonts();
 			self::$google_fonts = $googlefonts->get_google_fonts();
 		}
 		return self::$google_fonts;
