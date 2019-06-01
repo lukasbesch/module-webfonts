@@ -15,9 +15,9 @@ namespace Kirki\Module;
 use Kirki\Core\Helper;
 use Kirki\Core\Values;
 use Kirki\Core\Kirki;
-use Kirki\Modules\Webfonts\Google;
-use Kirki\Modules\Webfonts\Embed;
-use Kirki\Modules\Webfonts\Async;
+use Kirki\Module\Webfonts\Google;
+use Kirki\Module\Webfonts\Embed;
+use Kirki\Module\Webfonts\Async;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -34,7 +34,7 @@ class Webfonts {
 	 *
 	 * @access protected
 	 * @since 3.0.0
-	 * @var \Kirki\Modules\Webfonts\Google
+	 * @var \Kirki\Module\Webfonts\Google
 	 */
 	protected $fonts_google;
 
