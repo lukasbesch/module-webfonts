@@ -30,16 +30,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Webfonts {
 
 	/**
-	 * The object instance.
-	 *
-	 * @static
-	 * @access private
-	 * @since 3.0.0
-	 * @var object
-	 */
-	private static $instance;
-
-	/**
 	 * The Google object.
 	 *
 	 * @access protected
@@ -51,10 +41,10 @@ class Webfonts {
 	/**
 	 * The class constructor
 	 *
-	 * @access protected
+	 * @access public
 	 * @since 3.0.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 		add_action( 'wp_loaded', [ $this, 'run' ] );
 	}
 
@@ -67,22 +57,6 @@ class Webfonts {
 	public function run() {
 		$this->fonts_google = Google::get_instance();
 		$this->init();
-	}
-
-	/**
-	 * Gets an instance of this object.
-	 * Prevents duplicate instances which avoid artefacts and improves performance.
-	 *
-	 * @static
-	 * @access public
-	 * @since 3.0.0
-	 * @return object
-	 */
-	public static function get_instance() {
-		if ( ! self::$instance ) {
-			self::$instance = new self();
-		}
-		return self::$instance;
 	}
 
 	/**
