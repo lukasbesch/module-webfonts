@@ -125,7 +125,7 @@ final class Async {
 			$this->fonts_to_load[] = $font . ':' . join( ',', $weights ) . ':cyrillic,cyrillic-ext,devanagari,greek,greek-ext,khmer,latin,latin-ext,vietnamese,hebrew,arabic,bengali,gujarati,tamil,telugu,thai';
 		}
 		if ( ! empty( $this->fonts_to_load ) ) {
-			\Kirki\Modules\Webfont_Loader\Module::$load = true;
+			\Kirki\Module\Webfont_Loader::$load = true;
 		}
 	}
 
