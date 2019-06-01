@@ -10,7 +10,7 @@
  * @since       3.0.0
  */
 
-namespace Kirki\Modules\Webfonts;
+namespace Kirki\Module;
 
 use Kirki\Core\Helper;
 use Kirki\Core\Values;
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Adds script for tooltips.
  */
-class Module {
+class Webfonts {
 
 	/**
 	 * The object instance.
