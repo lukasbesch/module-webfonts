@@ -38,6 +38,16 @@ class Webfonts {
 	 */
 	protected $fonts_google;
 
+    /**
+     * An array of fields to be processed.
+     *
+     * @static
+     * @access public
+     * @since 4.0
+     * @var array
+     */
+    public static $fields = [];
+
 	/**
 	 * The class constructor
 	 *
@@ -45,6 +55,7 @@ class Webfonts {
 	 * @since 3.0.0
 	 */
 	public function __construct() {
+        add_action( 'kirki_field_init', [ $this, 'field_init' ], 10, 2 );
 		add_action( 'wp_loaded', [ $this, 'run' ] );
 	}
 
@@ -86,6 +97,29 @@ class Webfonts {
 		return ( is_customize_preview() || is_admin() ) ? 'async' : 'embed';
 	}
 
+    /**
+     * Runs when a field gets added.
+     * Adds fields to this object so we can loop through them.
+     *
+     * @access public
+     * @since 4.0
+     * @param array  $args   The field args.
+     * @param Object $object The field object.
+     * @return void
+     */
+    public function field_init( $args, $object ) {
+        if ( ! isset( $args['type'] ) && isset( $object->type ) ) {
+            $args['type'] = $object->type;
+        }
+
+        if ( ! isset( $args['type'] ) || $args['type'] !== 'typography' ) {
+            return;
+        }
+
+        // Use the settings ID as key:
+        self::$fields[$args['settings']] = $args;
+    }
+
 	/**
 	 * Goes through all our fields and then populates the $this->fonts property.
 	 *
@@ -93,7 +127,7 @@ class Webfonts {
 	 * @param string $config_id The config-ID.
 	 */
 	public function loop_fields( $config_id ) {
-		foreach ( Kirki::$fields as $field ) {
+		foreach ( self::$fields as $field ) {
 			if ( isset( $field['kirki_config'] ) && $config_id !== $field['kirki_config'] ) {
 				continue;
 			}
