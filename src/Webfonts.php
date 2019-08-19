@@ -38,15 +38,15 @@ class Webfonts {
 	 */
 	protected $fonts_google;
 
-    /**
-     * An array of fields to be processed.
-     *
-     * @static
-     * @access public
-     * @since 4.0
-     * @var array
-     */
-    public static $fields = [];
+	/**
+	 * An array of fields to be processed.
+	 *
+	 * @static
+	 * @access public
+	 * @since 4.0
+	 * @var array
+	 */
+	public static $fields = [];
 
 	/**
 	 * The class constructor
@@ -97,28 +97,29 @@ class Webfonts {
 		return ( is_customize_preview() || is_admin() ) ? 'async' : 'embed';
 	}
 
-    /**
-     * Runs when a field gets added.
-     * Adds fields to this object so we can loop through them.
-     *
-     * @access public
-     * @since 4.0
-     * @param array  $args   The field args.
-     * @param Object $object The field object.
-     * @return void
-     */
-    public function field_init( $args, $object ) {
-        if ( ! isset( $args['type'] ) && isset( $object->type ) ) {
-            $args['type'] = $object->type;
-        }
+	/**
+	 * Runs when a field gets added.
+	 * Adds fields to this object so we can loop through them.
+	 *
+	 * @access public
+	 * @since 4.0
+	 * @param array  $args   The field args.
+	 * @param Object $object The field object.
+	 * @return void
+	 */
+	public function field_init( $args, $object ) {
+		if ( ! isset( $args['type'] ) && isset( $object->type ) ) {
+			$args['type'] = $object->type;
+		}
 
-        if ( ! isset( $args['type'] ) || $args['type'] !== 'typography' ) {
-            return;
-        }
+		if ( ! isset( $args['type'] ) || $args['type'] !== 'typography' ) {
+			return;
+		}
 
-        // Use the settings ID as key:
-        self::$fields[$args['settings']] = $args;
-    }
+		// Use the settings ID as key:
+		self::$fields[ $args['settings'] ] = $args;
+	}
+
 
 	/**
 	 * Goes through all our fields and then populates the $this->fonts property.
