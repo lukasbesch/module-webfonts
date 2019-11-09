@@ -89,7 +89,11 @@ final class Helper {
 
 		$saved_fonts = get_option( 'kirki_font_local_filenames', [] );
 		if ( isset( $saved_fonts[ $url ] ) && file_exists( $saved_fonts[ $url ]['file'] ) ) {
-			return $saved_fonts[ $url ]['url'];
+			return str_replace(
+				wp_normalize_path( untrailingslashit( WP_CONTENT_DIR ) ),
+				untrailingslashit( content_url() ),
+				$saved_fonts[ $url ]['file']
+			);
 		}
 
 		// Gives us access to the download_url() and wp_handle_sideload() functions.
@@ -135,7 +139,7 @@ final class Helper {
 	/**
 	 * Gets the root folder path.
 	 * This is left for backward compatibility.
-	 * 
+	 *
 	 *
 	 * @static
 	 * @since 1.0.0
@@ -149,7 +153,7 @@ final class Helper {
 	/**
 	 * Gets the root folder url.
 	 * This is left for backward compatibility.
-	 * 
+	 *
 	 *
 	 * @static
 	 * @since 1.0.0
