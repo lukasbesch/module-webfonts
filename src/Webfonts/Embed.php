@@ -143,16 +143,29 @@ final class Embed {
 	 * @since 1.0.0
 	 */
 	public function the_css() {
+		static $printed_contents;
+
 		foreach ( $this->fonts_to_load as $font ) {
 
 			$family  = str_replace( ' ', '+', trim( $font['family'] ) );
 			$weights = join( ',', $font['weights'] );
 			$url     = "https://fonts.googleapis.com/css?family={$family}:{$weights}&subset=cyrillic,cyrillic-ext,devanagari,greek,greek-ext,khmer,latin,latin-ext,vietnamese,hebrew,arabic,bengali,gujarati,tamil,telugu,thai&display=swap";
 
+			if (isset($printed_contents[$url])) {
+			    continue;
+			}
+
 			$downloader = new Downloader();
 			$contents   = $downloader->get_styles( $url );
 
 			if ( $contents ) {
+
+				if (in_array($contents, $printed_contents, true)) {
+					continue;
+				}
+
+				$printed_contents[$url] = $contents;
+
 				/**
 				 * Note to code reviewers:
 				 *
